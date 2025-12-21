@@ -1,0 +1,264 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Estilos del Menú Lateral */
+.sidebar {
+    width: 260px;
+    background-color: #2c3e50; /* Color oscuro elegante */
+    color: #fff;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.profile-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.profile-header p {
+    font-size: 0.9rem;
+    color: #bdc3c7;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #34495e;
+    padding-bottom: 1rem;
+}
+
+.menu {
+    list-style: none;
+    flex-grow: 1;
+}
+
+.menu li {
+    margin-bottom: 1rem;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #ecf0f1;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+    display: block;
+}
+
+.menu a:hover, .menu a.active {
+    color: #e74c3c; /* Color de acento */
+    font-weight: 600;
+}
+
+.social-links {
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    color: #7f8c8d;
+}
+
+/* Contenido Principal */
+.content {
+    margin-left: 260px; /* Mismo ancho que el sidebar */
+    flex: 1;
+    background-color: #f9f9f9;
+}
+
+/* Secciones */
+.section {
+    padding: 4rem 3rem;
+    min-height: 80vh; /* Para que cada sección ocupe espacio */
+    border-bottom: 1px solid #eee;
+}
+
+.section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+    position: relative;
+}
+
+.section h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #e74c3c;
+    margin-top: 10px;
+}
+
+/* Hero Section (Inicio) */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80'); /* Imagen de fondo genérica artística */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.hero-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Estilos Específicos */
+
+/* Botones */
+.btn {
+    display: inline-block;
+    background: #e74c3c;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 1rem;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #c0392b;
+}
+
+/* Videos */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.video-placeholder {
+    background: #ddd;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    margin-bottom: 0.5rem;
+}
+
+/* Galerías (Fotos y Dibujos) */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.gallery-item {
+    background: #e0e0e0;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    transition: transform 0.3s;
+    overflow: hidden;
+    flex-direction: column;
+    position: relative;
+}
+
+.gallery-item a {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 0.5rem;
+    text-align: center;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.gallery-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Talleres */
+.workshop-card {
+    background: white;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border-left: 4px solid #e74c3c;
+}
+
+.workshop-card .date {
+    color: #e74c3c;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Contact Form */
+.contact-form {
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-form input, 
+.contact-form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Responsive (Móvil) */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 1rem;
+    }
+
+    .content {
+        margin-left: 0;
+    }
+
+    .hero-text h2 {
+        font-size: 2.5rem;
+    }
+}
