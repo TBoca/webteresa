@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viajes - Teresa Boca</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background-color: #2d5016;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        .back-link {
+            display: inline-block;
+            margin: 20px;
+            background: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            background: #c0392b;
+        }
+        #map {
+            height: 600px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .info-text {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .leaflet-popup-content {
+            text-align: center;
+        }
+        .popup-link {
+            display: inline-block;
+            background: transparent;
+            color: #2d5016;
+            padding: 8px 16px;
+            margin-top: 10px;
+            border-radius: 4px;
+            border: 2px solid #2d5016;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .popup-link:hover {
+            background: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Mis Viajes</h1>
+        <p>Haz clic en los marcadores para ver los álbumes de fotos</p>
+    </div>
+
+    <a href="index.html" class="back-link">← Volver al portafolio</a>
+
+    <div id="map"></div>
+
+    <div class="info-text">
+        <h2>Acerca de este mapa</h2>
+        <p>En este mapa interactivo puedes explorar los diferentes lugares que he visitado. Cada marcador representa una ubicación y al hacer clic en él podrás acceder al álbum de fotos correspondiente.</p>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Inicializar el mapa
+        var map = L.map('map').setView([0, 0], 2);
+
+        // Agregar capa de OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors',
+            maxZoom: 18
+        }).addTo(map);
+
+        // Array de ubicaciones con sus datos
+        var locations = [
+            {
+                name: "Catamarca",
+                coords: [-28.4696, -65.7795],
+                description: "Paisajes de Catamarca",
+                photoLink: "https://photos.app.goo.gl/tNKVn1ja4AMtspNa9"
+            },
+            {
+                name: "China",
+                coords: [35.8617, 104.1954],
+                description: "Viaje por China",
+                photoLink: "https://photos.app.goo.gl/tNKVn1ja4AMtspNa9"
+            },
+            {
+                name: "Jujuy",
+                coords: [-24.1858, -65.2995],
+                description: "Paisajes de Jujuy",
+                photoLink: "https://photos.app.goo.gl/Rsv5gx1NUWg9jTxs8"
+            },
+            {
+                name: "Salvador de Bahía, Brasil",
+                coords: [-12.9714, -38.5014],
+                description: "Salvador de Bahía",
+                photoLink: "https://photos.app.goo.gl/wR8poanquytVXiiF8"
+            },
+            {
+                name: "El Cairo, Egipto",
+                coords: [30.0444, 31.2357],
+                description: "Viaje por El Cairo",
+                photoLink: "https://goo.gl/photos/M2fogBvaviy1L7qe9"
+            },
+            {
+                name: "Inglaterra",
+                coords: [51.5074, -0.1278],
+                description: "Viaje por Inglaterra",
+                photoLink: "https://photos.app.goo.gl/g1jNa5FWgyqupJQv8"
+            },
+            {
+                name: "Cuba",
+                coords: [23.1136, -82.3666],
+                description: "Viaje por Cuba",
+                photoLink: "https://photos.app.goo.gl/6YCfkanoRsqzf2jn9"
+            },
+            {
+                name: "Cuzco, Perú",
+                coords: [-13.5319, -71.9675],
+                description: "Viaje a Cuzco",
+                photoLink: "https://photos.app.goo.gl/5p7mqb2gnaupeDN59"
+            },
+            {
+                name: "Uruguay",
+                coords: [-34.9011, -56.1645],
+                description: "Viaje por Uruguay",
+                photoLink: "https://photos.app.goo.gl/ZHFhfFXczFvi1aKg7"
+            },
+            {
+                name: "Lihuel Calel, La Pampa",
+                coords: [-38.0333, -65.5833],
+                description: "Lihuel Calel",
+                photoLink: "https://photos.app.goo.gl/LL7Sm9yr54DfdjgKA"
+            },
+            {
+                name: "Isla de Chiloé, Chile",
+                coords: [-42.6269, -73.9577],
+                description: "Isla de Chiloé",
+                photoLink: "https://photos.app.goo.gl/rjK1KjvSG9WXKBh87"
+            },
+            {
+                name: "Machu Picchu, Perú",
+                coords: [-13.1631, -72.5450],
+                description: "Machu Picchu",
+                photoLink: "https://photos.app.goo.gl/rjK1KjvSG9WXKBh87"
+            },
+            {
+                name: "Santa Cruz, Argentina",
+                coords: [-50.0, -69.0],
+                description: "Paisajes de Santa Cruz",
+                photoLink: "https://photos.app.goo.gl/rjK1KjvSG9WXKBh87"
+            },
+            {
+                name: "Escocia",
+                coords: [56.4907, -4.2026],
+                description: "Viaje por Escocia",
+                photoLink: "https://photos.app.goo.gl/rjK1KjvSG9WXKBh87"
+            },
+            {
+                name: "Venecia, Italia",
+                coords: [45.4408, 12.3155],
+                description: "Venecia",
+                photoLink: "https://photos.app.goo.gl/fLJ6a6xMWLMi9b5c9"
+            },
+            {
+                name: "Florianópolis, Brasil",
+                coords: [-27.5954, -48.5480],
+                description: "Florianópolis",
+                photoLink: "https://photos.app.goo.gl/fLJ6a6xMWLMi9b5c9"
+            },
+            {
+                name: "San Andrés, Colombia",
+                coords: [12.5847, -81.7006],
+                description: "Isla de San Andrés",
+                photoLink: "https://photos.app.goo.gl/uxJg3GWsxLez51R7A"
+            },
+            {
+                name: "España",
+                coords: [40.4168, -3.7038],
+                description: "Viaje por España",
+                photoLink: "https://photos.app.goo.gl/uxJg3GWsxLez51R7A"
+            }
+            // Agrega más ubicaciones aquí siguiendo el mismo formato:
+            // {
+            //     name: "Nombre del lugar",
+            //     coords: [latitud, longitud],
+            //     description: "Descripción breve",
+            //     photoLink: "URL del álbum de Google Fotos"
+            // }
+        ];
+
+        // Crear un grupo para los marcadores
+        var markersGroup = [];
+
+        // Agregar marcadores al mapa
+        locations.forEach(function(location) {
+            var marker = L.marker(location.coords).addTo(map);
+            markersGroup.push(marker);
+            
+            // Tooltip que aparece al pasar el mouse
+            marker.bindTooltip(location.name, {
+                permanent: false,
+                direction: 'top'
+            });
+            
+            // Popup que aparece al hacer clic
+            var popupContent = `
+                <div>
+                    <h3>${location.name}</h3>
+                    <p>${location.description}</p>
+                    <a href="${location.photoLink}" target="_blank" class="popup-link">Ver fotos</a>
+                </div>
+            `;
+            marker.bindPopup(popupContent);
+            markersGroup.push(marker);
+        });
+
+        // Ajustar el mapa para que muestre todos los marcadores
+        if (markersGroup.length > 0) {
+            var group = new L.featureGroup(markersGroup);
+            map.fitBounds(group.getBounds().pad(0.1));
+        }
+    </script>
+</body>
+</html>

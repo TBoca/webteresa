@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const videoHelp = document.getElementById('video-help');
+
+    // YouTube puede bloquear embeds si la página se abre como archivo local (file://).
+    if (window.location.protocol === 'file:' && videoHelp) {
+        videoHelp.hidden = false;
+    }
+
     // Obtener todas las secciones y los enlaces del menú
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.menu a');
@@ -25,17 +32,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Scroll suave al hacer clic en los enlaces (opcional, ya que CSS scroll-behavior: smooth también funciona)
+    // Scroll suave al hacer clic en los enlaces internos solamente
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
+            const href = link.getAttribute('href');
             
-            window.scrollTo({
-                top: targetSection.offsetTop,
-                behavior: 'smooth'
-            });
+            // Solo aplicar scroll suave si es un enlace interno (comienza con #)
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const targetId = href.substring(1);
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+            // Si no comienza con #, dejar que el navegador maneje el enlace normalmente
         });
     });
 });

@@ -16,7 +16,7 @@ body {
 /* Estilos del Menú Lateral */
 .sidebar {
     width: 260px;
-    background-color: #2c3e50; /* Color oscuro elegante */
+    background-color: #2d5016; /* Verde oscuro */
     color: #fff;
     height: 100vh;
     position: fixed;
@@ -54,7 +54,7 @@ body {
 .menu a {
     text-decoration: none;
     color: #ecf0f1;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     transition: color 0.3s;
     display: block;
 }
@@ -74,7 +74,7 @@ body {
 .content {
     margin-left: 260px; /* Mismo ancho que el sidebar */
     flex: 1;
-    background-color: #f9f9f9;
+    background-color: #c8e6c9;
 }
 
 /* Secciones */
@@ -104,23 +104,23 @@ body {
 /* Hero Section (Inicio) */
 .hero {
     height: 100vh;
-    background-color: #2c3e50;
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #333;
     text-align: center;
     gap: 2rem;
 }
 
 .hero::before {
     content: '';
-    width: 70%;
-    max-width: 800px;
-    height: 50vh;
+    width: 95%;
+    max-width: 1400px;
+    height: 75vh;
     background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('miespacio.jpg');
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     display: block;
@@ -174,6 +174,16 @@ body {
     margin-top: 0.5rem;
     text-align: center;
     font-weight: 500;
+}
+
+.video-help {
+    margin: 0.8rem 0 1.5rem;
+    padding: 0.75rem 1rem;
+    border-left: 4px solid #e74c3c;
+    background: #fff8f7;
+    color: #7f2d20;
+    border-radius: 4px;
+    font-size: 0.95rem;
 }
 
 .video-placeholder {
